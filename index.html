@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Direcciones Bitcoin</title>
+</head>
+<body>
+    <h1>Generador de Direcciones Bitcoin</h1>
+    <button onclick="generateBitcoinAddress()">Generar Dirección Bitcoin</button>
+    <p id="bitcoinAddress"></p>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+        function generateBitcoinAddress() {
+            // Generar una clave privada aleatoria
+            let privateKey = CryptoJS.lib.WordArray.random(32).toString();
+            
+            // Mostrar la clave privada en el console para propósitos educativos
+            console.log("Clave Privada: " + privateKey);
+
+            // Crear la dirección Bitcoin (simplificada)
+            // Aquí, por simplicidad, solo hacemos un hash SHA256 de la clave privada
+            let publicKey = CryptoJS.SHA256(privateKey).toString();
+            let bitcoinAddress = "1" + publicKey.substring(0, 33);
+
+            // Mostrar la dirección Bitcoin
+            document.getElementById('bitcoinAddress').innerText = "Dirección Bitcoin: " + bitcoinAddress;
+        }
+    </script>
+</body>
+</html>
